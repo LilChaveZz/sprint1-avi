@@ -1,0 +1,27 @@
+# === 1. Ignorar archivos de datos por defecto en el resto del proyecto ===
+*.xlsx
+*.xls
+*.csv
+
+# === 2. EXCEPCIÓN: Incluir TODO lo que esté dentro de la carpeta data/ ===
+!data/**
+
+# === 3. Ignorar archivos temporales de bloqueo que crea Excel (~$...) ===
+~$*.xlsx
+~$*.xls
+
+# === 4. Archivos temporales de Jupyter Notebooks ===
+.ipynb_checkpoints/
+
+# === 5. Python, Cache y Entornos Virtuales ===
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.env
+
+# === 6. Editor y Sistema Operativo ===
+.vscode/
+.DS_Store
+Thumbs.db
