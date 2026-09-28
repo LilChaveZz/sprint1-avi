@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aire en Las Pintas, marzo 2024 | AA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#eef2f3;--ink:#0f2530;--mut:#546a75;--line:#cbd7dc;--card:#fff;--acc:#0b6e7f;
+--b:#00e400;--a:#ffff00;--m:#ff7e00;--v:#ff0000;--x:#8f3f97;
+--fh:'Bricolage Grotesque',system-ui,sans-serif;--fb:'IBM Plex Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--fb)}
+a{color:var(--acc)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);background:var(--card)}
+header.top .w{display:flex;justify-content:space-between;align-items:center;padding-top:12px;padding-bottom:12px;gap:16px;flex-wrap:wrap}
+.brand{font:800 20px var(--fh)}
+nav a{margin-left:18px;text-decoration:none;color:var(--mut);font-size:14px;font-weight:500}
+nav a:hover{color:var(--ink)}
+h1,h2,h3{font-family:var(--fh);line-height:1.1}
+h1{font-size:clamp(38px,6vw,68px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+h3{font-size:19px;font-weight:500;margin-bottom:4px}
+section{padding:56px 0}
+.lead{color:var(--mut);max-width:62ch;margin-bottom:28px}
+.hero{padding:48px 0 40px;display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start}
+.hero p{max-width:46ch;color:var(--mut);margin-top:18px;font-size:18px}
+.hero .meta{font-size:14px;margin-top:22px}
+.cal{background:var(--card);border:1px solid var(--line);padding:16px;border-radius:6px}
+.cal-h{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;font-size:12px;color:var(--mut);text-align:center;margin-bottom:5px}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.d{aspect-ratio:1;border:2px solid transparent;border-radius:4px;font:600 14px var(--fb);cursor:pointer;color:#111;display:flex;align-items:flex-start;padding:5px}
+.d[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+.d.V{color:#fff}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:12px;color:var(--mut)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px;border:1px solid rgba(0,0,0,.25)}
+.detail{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:13px}
+.detail b{display:block;font:800 22px var(--fh)}
+.detail .t{grid-column:1/-1;font-size:15px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink);border-bottom:1px solid var(--line);background:var(--card)}
+.kpi{padding:22px 20px;border-right:1px solid var(--line)}
+.kpi:last-child{border:0}
+.kpi b{font:800 clamp(34px,4vw,48px)/1 var(--fh);display:block}
+.kpi span{font-size:14px;color:var(--mut);display:block;margin-top:6px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ch{position:relative;height:300px}
+.ch.tall{height:340px}
+.why{font-size:14px;color:var(--mut);margin-top:12px;border-left:3px solid var(--acc);padding-left:12px}
+.why strong{color:var(--ink)}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tabs button{font:500 14px var(--fb);padding:6px 14px;border:1px solid var(--line);background:#fff;border-radius:20px;cursor:pointer;color:var(--ink)}
+.tabs button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.claims{display:grid;gap:16px}
+.claim{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px}
+.claim h3{font-weight:800}
+.claim p{font-size:15px;color:var(--mut)}
+.claim ul{padding-left:18px;font-size:15px}
+.claim li{margin-bottom:4px}
+.act{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.act div{background:var(--ink);color:#e9f1f3;border-radius:6px;padding:22px}
+.act h3{color:#fff;font-weight:800}
+.act p{font-size:15px;color:#b9cdd3}
+.lim{columns:2;column-gap:32px;font-size:15px;color:var(--mut)}
+.lim p{break-inside:avoid;margin-bottom:12px}
+.lim strong{color:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+th{font-weight:600}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:8px;border:1px solid rgba(0,0,0,.25);vertical-align:-1px}
+.scroll{overflow-x:auto}
+footer{background:var(--ink);color:#b9cdd3;padding:36px 0;font-size:14px}
+footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:#fff}
+@media(max-width:860px){.hero,.grid2,.claim,.act{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.kpi:nth-child(2){border-right:0}.kpi{border-bottom:1px solid var(--line)}.lim{columns:1}nav{display:none}}
+@media(prefers-reduced-motion:no-preference){.cal{animation:in .6s ease-out}@keyframes in{from{opacity:0;transform:translateY(8px)}}}
+</style>
+</head>
+<body>
+<header class="top"><div class="w"><span class="brand">AA</span>
+<nav aria-label="Secciones"><a href="#dias">Días</a><a href="#horas">Horas</a><a href="#hallazgos">Hallazgos</a><a href="#datos">Calidad de datos</a><a href="#agencia">Decisiones</a></nav></div></header>
+
+<main>
+<div class="w hero">
+ <div>
+  <h1>Marzo en Las Pintas: 23 de 31 días con aire Mala</h1>
+  <p>Ni un solo día Buena. Las partículas PM₂.₅ y PM₁₀ marcaron el rumbo del mes, con picos cada mañana entre las 7:00 y las 10:00 h.</p>
+  <p class="meta">Estación PIN, Zona Metropolitana de Guadalajara · 1 al 31 de marzo de 2024 · Índice AIRE Y SALUD (NOM-172-SEMARNAT-2023). Selecciona un día del calendario.</p>
+ </div>
+ <div class="cal" aria-label="Calendario de marzo 2024 por categoría de calidad del aire">
+  <div class="cal-h"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+  <div class="cal-g" id="cal"></div>
+  <div class="legend"><span><i style="background:var(--b)"></i>Buena (0)</span><span><i style="background:var(--a)"></i>Aceptable (3)</span><span><i style="background:var(--m)"></i>Mala (23)</span><span><i style="background:var(--v)"></i>Muy Mala (5)</span><span><i style="background:var(--x)"></i>Extremadamente Mala (0)</span></div>
+  <div class="detail" id="det" aria-live="polite"></div>
+ </div>
+</div>
+
+<div class="w"><div class="kpis">
+ <div class="kpi"><b>74.2%</b><span>de los días fue Mala (23 días)</span></div>
+ <div class="kpi"><b>25 / 31</b><span>días con PM₂.₅ como determinante, solo o con PM₁₀</span></div>
+ <div class="kpi"><b>269.6</b><span>µg/m³ de PM₂.₅ el 11 de marzo a las 08:00 h</span></div>
+ <div class="kpi"><b>6</b><span>días sin suficientes lecturas de PM₂.₅</span></div>
+</div></div>
+
+<section id="dias"><div class="w">
+ <h2>Un mes dominado por partículas</h2>
+ <p class="lead">Cada día se resume en una categoría según el contaminante que más deteriora el aire. Aquí se ve cuántos días cayeron en cada una y qué contaminante decidió.</p>
+ <div class="grid2">
+  <div class="panel"><h3>Días por categoría</h3><div class="ch"><canvas id="cCat" role="img" aria-label="Días por categoría: Mala 23, Muy Mala 5, Aceptable 3"></canvas></div>
+   <p class="why"><strong>Por qué importa:</strong> 90.3% del mes estuvo en Mala o peor. Con este perfil el problema es estructural, no de un episodio aislado.</p></div>
+  <div class="panel"><h3>Contaminante determinante</h3><div class="ch"><canvas id="cDet" role="img" aria-label="Determinante: PM2.5 y PM10 juntos 16 días, PM2.5 solo 9, PM10 solo 6, ozono 0"></canvas></div>
+   <p class="why"><strong>Por qué importa:</strong> los cinco días Muy Mala (9, 11, 23, 27 y 28) tuvieron PM₂.₅ como único determinante. El ozono no decidió ningún día.</p></div>
+ </div>
+ <div class="panel" style="margin-top:20px"><h3>Promedio diario de partículas (µg/m³)</h3>
+  <div class="ch tall"><canvas id="cDay" role="img" aria-label="Promedio diario de PM2.5 y PM10 en marzo 2024"></canvas></div>
+  <p class="why"><strong>Cómo leerla:</strong> las líneas punteadas marcan los límites del PM₂.₅ de la NOM (33 µg/m³ pasa de Aceptable a Mala; 79 pasa de Mala a Muy Mala). Ningún promedio diario bajó de 33. El 23 de marzo tuvo el promedio más alto de PM₁₀ (127) y de PM₂.₅ (96).</p></div>
+</div></section>
+
+<section id="horas" style="background:var(--card);border-block:1px solid var(--line)"><div class="w">
+ <h2>Del dato horario al indicador diario</h2>
+ <p class="lead">Resumir un día en una sola categoría es útil para comparar, pero esconde cuándo ocurre el deterioro. El detalle horario lo muestra.</p>
+ <div class="grid2">
+  <div class="panel" style="background:var(--bg)"><h3>Perfil promedio de un día típico</h3>
+   <div class="tabs" role="group" aria-label="Variable a comparar"><button aria-pressed="true" data-p="pm">Partículas</button><button aria-pressed="false" data-p="o3">Ozono (ppb)</button><button aria-pressed="false" data-p="ws">Viento (m/s)</button><button aria-pressed="false" data-p="rs">Radiación (W/m²)</button></div>
+   <div class="ch"><canvas id="cProf" role="img" aria-label="Perfil horario promedio"></canvas></div>
+   <p class="why" id="profWhy"></p></div>
+  <div class="panel" style="background:var(--bg)"><h3>Los dos días simulados</h3>
+   <div class="tabs" role="group" aria-label="Día a mostrar"><button aria-pressed="true" data-d="11">11 de marzo</button><button aria-pressed="false" data-d="12">12 de marzo</button></div>
+   <div class="ch"><canvas id="cSim" role="img" aria-label="PM2.5 y ozono por hora"></canvas></div>
+   <p class="why" id="simWhy"></p></div>
+ </div>
+</div></section>
+
+<section id="hallazgos"><div class="w">
+ <h2>Hallazgos y su respaldo</h2>
+ <p class="lead">Cada conclusión va con la evidencia que la sostiene y lo que no podemos afirmar.</p>
+ <div class="claims">
+  <div class="claim"><div><h3>El material particulado explica el deterioro</h3><p>PM₂.₅ decidió la categoría en 25 de 31 días; PM₁₀, en 22.</p></div>
+   <ul><li>9 días solo PM₂.₅, 6 solo PM₁₀ y 16 ambos.</li><li>Los 5 días Muy Mala fueron por PM₂.₅.</li><li>El ozono tuvo un comportamiento satisfactorio 96.77% del mes en la escala diaria.</li></ul></div>
+  <div class="claim"><div><h3>El pico ocurre en la mañana</h3><p>La concentración promedio de PM₂.₅ sube desde las 05:00 h y llega a su máximo a las 09:00 h.</p></div>
+   <ul><li>Promedio de las 09:00 h: 160 µg/m³ de PM₂.₅ y 165 de PM₁₀, casi 3 veces el PM₂.₅ de las 15:00 h (57).</li><li>El 11 de marzo llegó a Extremadamente Mala a las 08:00 h.</li><li>En el mes hubo 2 horas Extremadamente Mala y 147 Muy Mala.</li></ul></div>
+  <div class="claim"><div><h3>Viento, temperatura y radiación coinciden con la recuperación</h3><p>Es una coincidencia temporal, no una prueba de causa.</p></div>
+   <ul><li>Con el calor y la radiación de mediodía el PM₂.₅ baja y el ozono sube (hasta 0.058 ppm el 11 de marzo).</li><li>Con viento de 9 a 11 m/s por la tarde, las partículas bajan a niveles Aceptable o Buena.</li><li>El ozono cambia de contaminante dominante hacia las 13:00 h del 12 de marzo.</li></ul></div>
+  <div class="claim"><div><h3>La categoría diaria pierde información</h3><p>El 11 de marzo fue "Muy Mala" en el calendario, pero incluyó horas Buena, Aceptable y Extremadamente Mala.</p></div>
+   <ul><li>Se pierde la hora exacta y la duración del episodio.</li><li>Se pierde el cambio de contaminante dominante.</li><li>Se pierde la relación con las variables meteorológicas.</li></ul></div>
+ </div>
+</div></section>
+
+<section id="datos" style="background:var(--card);border-block:1px solid var(--line)"><div class="w">
+ <h2>Qué tan confiables son los datos</h2>
+ <p class="lead">La NOM pide al menos 75% de lecturas válidas por día (18 de 24 horas) para calcular el promedio diario. No se inventaron mediciones faltantes.</p>
+ <div class="grid2">
+  <div class="panel" style="background:var(--bg)"><h3>Horas de PM₂.₅ válidas por día</h3><div class="ch"><canvas id="cN" role="img" aria-label="Horas válidas de PM2.5 por día; seis días bajo 18"></canvas></div>
+   <p class="why"><strong>Resultado:</strong> los días 10, 17, 18, 25, 30 y 31 no llegaron a 18 horas. Su promedio de PM₂.₅ es una estimación.</p></div>
+  <div class="panel" style="background:var(--bg)"><h3>Horas sin dato por variable (de 744)</h3><div class="ch"><canvas id="cMiss" role="img" aria-label="Horas faltantes por variable"></canvas></div>
+   <p class="why"><strong>Resultado:</strong> NO, NO₂, SO₂, CO y humedad relativa no tienen ningún registro en marzo. La categoría se basa solo en PM₂.₅, PM₁₀ y O₃.</p></div>
+ </div>
+ <div class="scroll panel" style="margin-top:20px;background:var(--bg)"><h3>Bandas del Índice AIRE Y SALUD (µg/m³ para partículas, ppm para ozono)</h3>
+ <table><tr><th>Categoría</th><th>Riesgo</th><th>PM₁₀</th><th>PM₂.₅</th><th>O₃</th></tr>
+ <tr><td><i class="sw" style="background:var(--b)"></i>Buena</td><td>Bajo</td><td>≤ 45</td><td>≤ 15</td><td>≤ 0.058</td></tr>
+ <tr><td><i class="sw" style="background:var(--a)"></i>Aceptable</td><td>Moderado</td><td>45 a 60</td><td>15 a 33</td><td>0.058 a 0.090</td></tr>
+ <tr><td><i class="sw" style="background:var(--m)"></i>Mala</td><td>Alto</td><td>60 a 132</td><td>33 a 79</td><td>0.090 a 0.135</td></tr>
+ <tr><td><i class="sw" style="background:var(--v)"></i>Muy Mala</td><td>Muy alto</td><td>132 a 213</td><td>79 a 130</td><td>0.135 a 0.175</td></tr>
+ <tr><td><i class="sw" style="background:var(--x)"></i>Extremadamente Mala</td><td>Extremadamente alto</td><td>&gt; 213</td><td>&gt; 130</td><td>&gt; 0.175</td></tr></table>
+ <p class="why">PM₂.₅ y PM₁₀ usan el promedio móvil ponderado de 12 horas (NowCast). La categoría global es la del contaminante más deteriorado.</p></div>
+</div></section>
+
+<section id="agencia"><div class="w">
+ <h2>Qué debería hacer la agencia</h2>
+ <p class="lead">Cuatro decisiones que se desprenden de los datos.</p>
+ <div class="act">
+  <div><h3>Identificar y regular las fuentes</h3><p>Con 74.2% de días en Mala y 16.1% en Muy Mala, el problema requiere un estudio de fuentes de partículas en la zona.</p></div>
+  <div><h3>Dar mantenimiento al sensor de PM₂.₅</h3><p>Seis días no alcanzaron el 75% de lecturas (19.35% del mes). Se recomienda mantenimiento correctivo.</p></div>
+  <div><h3>Avisar por la mañana</h3><p>Emitir alertas con el NowCast antes del pico de las 7:00 a 10:00 h, dirigidas sobre todo a personas sensibles: niñas y niños, adultos mayores, embarazadas y personas con asma o EPOC.</p></div>
+  <div><h3>Mantener el monitoreo de ozono</h3><p>No es una preocupación mensual, pero hay que vigilar picos al mediodía. Actualizar los avisos en la tarde sin decir que el riesgo desapareció si la categoría no es Buena.</p></div>
+ </div>
+</div></section>
+
+<section style="padding-top:0"><div class="w">
+ <h2>Límites del análisis</h2>
+ <div class="lim">
+  <p><strong>Sin fuentes de emisión.</strong> La estación mide concentraciones, no de dónde vienen. No podemos atribuir el origen de las partículas.</p>
+  <p><strong>Aplicación retrospectiva.</strong> La NOM-172-SEMARNAT-2023 entró en vigor después de marzo de 2024. Los datos no se reportaron originalmente con esta norma.</p>
+  <p><strong>Viento incompleto.</strong> Faltan 563 de 744 horas de velocidad y 421 de dirección del viento, lo que impide modelos de dispersión.</p>
+  <p><strong>PM₂.₅ con baja cobertura.</strong> Seis días sin suficiencia limitan la confiabilidad del promedio diario de ese contaminante.</p>
+ </div>
+</div></section>
+</main>
+
+<footer><div class="w"><div><strong style="color:#fff">AA</strong> · Análisis y Visualización de la Información, CUCEI, Universidad de Guadalajara · Sprint 1, septiembre de 2026</div>
+<div>Datos: <a href="https://aire.jalisco.gob.mx/">SIMAJ</a> · Código: <a href="https://github.com/LilChaveZz/sprint1-avi">repositorio en GitHub</a></div></div></footer>
+
+<script>
+const D={pm25:[63.9,49.9,47.6,59.7,73.9,59.2,66.4,72.9,84.5,81.3,90.0,62.4,68.3,75.3,67.0,73.7,54.9,52.5,77.4,48.7,72.9,66.8,95.9,58.2,64.8,79.5,86.2,85.4,55.0,67.3,61.6],
+pm10:[85.1,67.4,61.0,77.1,97.8,75.9,87.1,88.8,104.8,81.9,114.2,78.3,83.8,90.1,87.5,95.3,67.8,66.0,86.5,61.6,88.5,82.6,126.9,73.5,82.2,95.1,108.3,101.2,68.8,75.4,68.0],
+o3:[0.051,0.056,0.048,0.043,0.056,0.054,0.05,0.046,0.054,0.066,0.058,0.056,0.053,0.051,0.046,0.05,0.036,0.043,0.047,0.055,0.041,0.045,0.07,0.055,0.054,0.055,0.092,0.081,0.07,0.068,0.051],
+n:[19,20,20,19,24,22,21,20,22,16,22,22,21,18,19,18,15,17,18,22,22,21,21,20,17,21,20,19,19,17,17],
+hp25:[44.6,45.1,42.2,47.0,56.9,72.5,90.3,113.4,146.2,160.2,120.8,86.5,65.4,63.9,63.4,57.1,58.9,58.8,58.1,58.1,55.3,49.2,47.7,46.4],
+hp10:[64.3,62.4,59.5,67.7,82.2,101.0,125.4,160.0,189.0,165.0,99.6,64.7,56.4,57.8,62.8,62.7,65.0,66.6,65.5,72.0,73.9,70.3,71.9,69.6],
+ho3:[17.1,15.6,14.8,12.3,8.6,6.6,5.7,6.2,10.4,24.4,39.2,47.9,51.1,50.7,48.7,45.9,43.2,40.4,35.3,27.3,22.4,19.4,18.1,17.3],
+hws:[2.7,2.4,1.4,0.0,1.0,null,null,null,0.1,2.9,2.5,4.9,5.5,10.5,8.8,9.9,9.0,10.0,9.9,7.3,4.7,4.5,1.2,1.8],
+hrs:[null,0.3,0.3,0.3,null,35.3,24.4,22.7,36.0,53.6,121.2,149.8,149.8,160.2,160.4,146.9,132.4,111.8,93.2,110.2,0.5,null,0.8,null],
+s:{11:{p:[72.8,50.0,48.0,41.1,54.1,107.5,164.0,201.8,269.6,229.5,135.8,78.5,63.6,null,null,48.0,40.1,37.7,45.2,76.1,66.9,57.1,54.0,39.1],o:[19,20,16,15,6,8,6,10,8,16,46,47,56,58,58,50,39,38,31,23,24,22,26,27]},
+ 12:{p:[23.0,24.6,20.2,26.0,23.0,39.7,39.8,79.3,171.7,179.7,128.1,null,60.0,null,58.2,61.0,27.4,32.0,56.9,75.7,95.6,57.0,41.8,53.0],o:[28,25,19,21,13,17,12,6,12,22,37,50,54,56,54,47,27,24,31,26,20,21,15,21]}}};
+const cats="MMMMMMMMVM"+"VMMMMMAAMM"+"MMVMMMVVMMA",dets="b22bbbbb21"+"2bbbbb11b2"+"bb2b1b22211";
+const CN={A:'Aceptable',M:'Mala',V:'Muy Mala'},DN={b:'PM₂.₅ + PM₁₀',2:'PM₂.₅',1:'PM₁₀'};
+const CC={A:'#ffff00',M:'#ff7e00',V:'#ff0000'};
+const cal=document.getElementById('cal'),det=document.getElementById('det');
+for(let i=0;i<4;i++)cal.appendChild(document.createElement('span'));
+function sel(day){
+ cal.querySelectorAll('.d').forEach(b=>b.setAttribute('aria-pressed',b.dataset.d==day));
+ const i=day-1;
+ det.innerHTML=`<div class="t"><strong>${day} de marzo:</strong> ${CN[cats[i]]}, determinado por ${DN[dets[i]]}</div><div><b>${D.pm25[i]}</b>PM₂.₅ µg/m³</div><div><b>${D.pm10[i]}</b>PM₁₀ µg/m³</div><div><b>${D.o3[i].toFixed(3)}</b>O₃ máx. ppm</div><div><b>${D.n[i]}/24</b>horas de PM₂.₅${D.n[i]<18?' (insuficiente)':''}</div>`}
+for(let d=1;d<=31;d++){const b=document.createElement('button');b.className='d '+cats[d-1];b.textContent=d;b.dataset.d=d;b.style.background=CC[cats[d-1]];b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',`${d} de marzo, ${CN[cats[d-1]]}`);b.onclick=()=>sel(d);cal.appendChild(b)}
+sel(11);
+Chart.defaults.font.family="'IBM Plex Sans',sans-serif";Chart.defaults.color='#546a75';
+const X={responsive:true,maintainAspectRatio:false},H=[...Array(24).keys()].map(h=>String(h).padStart(2,'0')+':00');
+new Chart('cCat',{type:'bar',data:{labels:['Buena','Aceptable','Mala','Muy Mala','Ext. Mala'],datasets:[{data:[0,3,23,5,0],backgroundColor:['#00e400','#ffff00','#ff7e00','#ff0000','#8f3f97'],borderColor:'rgba(0,0,0,.35)',borderWidth:1}]},options:{...X,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'Días'}}}}});
+new Chart('cDet',{type:'bar',data:{labels:['PM₂.₅ + PM₁₀','Solo PM₂.₅','Solo PM₁₀','O₃'],datasets:[{data:[16,9,6,0],backgroundColor:'#0b6e7f'}]},options:{...X,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'Días'}}}}});
+const dl=[...Array(31).keys()].map(i=>i+1),ln=(l,d,c,x={})=>({label:l,data:d,borderColor:c,backgroundColor:c,pointRadius:x.r??2,borderWidth:x.w??2,borderDash:x.dash,tension:.25});
+new Chart('cDay',{type:'line',data:{labels:dl,datasets:[ln('PM₁₀',D.pm10,'#0f2530'),ln('PM₂.₅',D.pm25,'#c2410c'),ln('Límite PM₂.₅ Mala (33)',dl.map(_=>33),'#b59a00',{r:0,w:1.5,dash:[6,4]}),ln('Límite PM₂.₅ Muy Mala (79)',dl.map(_=>79),'#dc2626',{r:0,w:1.5,dash:[6,4]})]},options:{...X,interaction:{mode:'index',intersect:false},scales:{x:{title:{display:true,text:'Día de marzo'}},y:{title:{display:true,text:'µg/m³'}}},plugins:{legend:{position:'bottom'}}}});
+const P={pm:{d:()=>[ln('PM₂.₅',D.hp25,'#c2410c'),ln('PM₁₀',D.hp10,'#0f2530')],y:'µg/m³',w:'<strong>Lectura:</strong> el promedio de PM₂.₅ sube de 47 µg/m³ a las 03:00 h a 160 a las 09:00 h, y cae a 65 al mediodía. Ese es el bloque donde conviene avisar.'},
+o3:{d:()=>[ln('Ozono',D.ho3,'#0b6e7f')],y:'ppb',w:'<strong>Lectura:</strong> el ozono hace lo contrario: es mínimo al amanecer (6 ppb) y máximo cerca de las 12:00 h (51 ppb). Nunca alcanzó el límite Mala de 90 ppb en el promedio horario típico.'},
+ws:{d:()=>[ln('Viento',D.hws,'#475569')],y:'m/s',w:'<strong>Lectura:</strong> el viento es débil o no tiene registro en la madrugada y sube a 9 a 10 m/s por la tarde, justo cuando las partículas bajan. Faltan datos en 563 horas del mes.'},
+rs:{d:()=>[ln('Radiación solar',D.hrs,'#d97706')],y:'W/m²',w:'<strong>Lectura:</strong> la radiación pasa de 36 a 160 W/m² entre las 08:00 y las 13:00 h, la misma ventana donde el ozono aumenta. Faltan datos en 535 horas.'}};
+let prof;function drawProf(k){prof&&prof.destroy();prof=new Chart('cProf',{type:'line',data:{labels:H,datasets:P[k].d()},options:{...X,spanGaps:true,scales:{x:{ticks:{maxTicksLimit:8}},y:{title:{display:true,text:P[k].y}}},plugins:{legend:{position:'bottom'}}}});document.getElementById('profWhy').innerHTML=P[k].w}
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-p]').forEach(x=>x.setAttribute('aria-pressed',x==b));drawProf(b.dataset.p)});drawProf('pm');
+const col=v=>v==null?'#ccc':v<=15?'#00e400':v<=33?'#ffff00':v<=79?'#ff7e00':v<=130?'#ff0000':'#8f3f97';
+const SW={11:'<strong>11 de marzo:</strong> PM₂.₅ pasa de 41 a 270 µg/m³ entre las 03:00 y las 08:00 h, categoría Extremadamente Mala, y cae a 48 a las 15:00 h con viento de 10.8 m/s. El ozono llega a 58 ppb hacia el mediodía.',12:'<strong>12 de marzo:</strong> el episodio matutino es menor (máximo 180 µg/m³ a las 09:00 h) y a las 20:00 h vuelve a subir a 96. A las 13:00 h el ozono se vuelve dominante. Las barras grises son horas sin dato.'};
+let sim;function drawSim(d){sim&&sim.destroy();const s=D.s[d];sim=new Chart('cSim',{data:{labels:H,datasets:[{type:'bar',label:'PM₂.₅ (µg/m³, color según rango)',data:s.p.map(v=>v??3),backgroundColor:s.p.map(col),borderColor:'rgba(0,0,0,.25)',borderWidth:1,yAxisID:'y'},{type:'line',label:'Ozono (ppb)',data:s.o,borderColor:'#0f2530',backgroundColor:'#0f2530',pointRadius:2,yAxisID:'y2'}]},options:{...X,scales:{x:{ticks:{maxTicksLimit:8}},y:{title:{display:true,text:'PM₂.₅ µg/m³'},max:280},y2:{position:'right',title:{display:true,text:'O₃ ppb'},grid:{drawOnChartArea:false},max:70}},plugins:{legend:{position:'bottom'}}}});document.getElementById('simWhy').innerHTML=SW[d]}
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-d]').forEach(x=>x.setAttribute('aria-pressed',x==b));drawSim(b.dataset.d)});drawSim(11);
+new Chart('cN',{type:'bar',data:{labels:dl,datasets:[{label:'Horas válidas',data:D.n,backgroundColor:D.n.map(v=>v<18?'#dc2626':'#0b6e7f')},{type:'line',label:'Mínimo NOM (18 h)',data:dl.map(_=>18),borderColor:'#0f2530',borderDash:[6,4],pointRadius:0,borderWidth:1.5}]},options:{...X,scales:{y:{max:24,title:{display:true,text:'Horas'}},x:{title:{display:true,text:'Día de marzo'}}},plugins:{legend:{position:'bottom'}}}});
+new Chart('cMiss',{type:'bar',data:{labels:['O₃','PM₁₀','PM₂.₅','Dirección viento','Radiación','Velocidad viento','NO','NO₂','SO₂','CO','Humedad rel.'],datasets:[{data:[0,0,135,421,535,563,744,744,744,744,744],backgroundColor:'#0b6e7f'}]},options:{...X,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{max:744,title:{display:true,text:'Horas sin dato'}}}}});
+</script>
+</body>
+</html>
