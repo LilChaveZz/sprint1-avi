@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aire en Las Pintas, 2023 vs 2024 | AA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#eef2f3;--ink:#0f2530;--mut:#546a75;--line:#cbd7dc;--card:#fff;--acc:#0b6e7f;
+--y23:#0b6e7f;--y24:#c2410c;
+--b:#00e400;--a:#ffff00;--m:#ff7e00;--v:#ff0000;--x:#8f3f97;
+--fh:'Bricolage Grotesque',system-ui,sans-serif;--fb:'IBM Plex Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--fb)}
+a{color:var(--acc)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:0;z-index:5}
+header.top .w{display:flex;justify-content:space-between;align-items:center;padding-top:12px;padding-bottom:12px;gap:16px;flex-wrap:wrap}
+.brand{font:800 20px var(--fh)}
+nav a{margin-left:18px;text-decoration:none;color:var(--mut);font-size:14px;font-weight:500}
+nav a:hover{color:var(--ink)}
+h1,h2,h3{font-family:var(--fh);line-height:1.1}
+h1{font-size:clamp(36px,5.4vw,62px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+h3{font-size:19px;font-weight:500;margin-bottom:4px}
+section{padding:56px 0}
+.alt{background:var(--card);border-block:1px solid var(--line)}
+.lead{color:var(--mut);max-width:64ch;margin-bottom:28px}
+.hero{padding:48px 0 40px;display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start}
+.hero p{max-width:46ch;color:var(--mut);margin-top:18px;font-size:18px}
+.hero .meta{font-size:14px;margin-top:22px}
+.yr{display:flex;gap:6px;margin-bottom:12px}
+.yr button,.tabs button{font:500 14px var(--fb);padding:6px 14px;border:1px solid var(--line);background:#fff;border-radius:20px;cursor:pointer;color:var(--ink)}
+.yr button[aria-pressed=true],.tabs button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.cal{background:var(--card);border:1px solid var(--line);padding:16px;border-radius:6px}
+.cal-g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.d{border:2px solid transparent;border-radius:4px;font:600 14px var(--fb);cursor:pointer;color:#111;display:flex;flex-direction:column;align-items:flex-start;padding:8px 10px;min-height:68px;text-align:left}
+.d small{font:500 12px var(--fb);opacity:.85}
+.d[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+.d.V,.d.X{color:#fff}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:12px;color:var(--mut)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px;border:1px solid rgba(0,0,0,.25)}
+.detail{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:13px}
+.detail b{display:block;font:800 22px var(--fh)}
+.detail .t{grid-column:1/-1;font-size:15px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink);border-bottom:1px solid var(--line);background:var(--card)}
+.kpi{padding:22px 20px;border-right:1px solid var(--line)}
+.kpi:last-child{border:0}
+.kpi b{font:800 clamp(30px,3.6vw,44px)/1 var(--fh);display:block}
+.kpi span{font-size:14px;color:var(--mut);display:block;margin-top:6px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px}
+.alt .panel{background:var(--bg)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ch{position:relative;height:300px}
+.ch.tall{height:340px}
+.ch.short{height:240px}
+.why{font-size:14px;color:var(--mut);margin-top:12px;border-left:3px solid var(--acc);padding-left:12px}
+.why strong{color:var(--ink)}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px}
+.alt .stat{background:var(--bg)}
+.stat h3{font-size:15px;color:var(--mut);font-weight:500}
+.stat .v{font:800 26px var(--fh);margin-top:4px}
+.stat .v s{color:var(--mut);font-weight:500;font-size:18px;margin-right:4px;text-decoration:none}
+.stat .dl{font-size:13px;color:var(--mut)}
+.claims{display:grid;gap:16px}
+.claim{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px}
+.claim h3{font-weight:800}
+.claim p{font-size:15px;color:var(--mut)}
+.claim ul{padding-left:18px;font-size:15px}
+.claim li{margin-bottom:4px}
+.act{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.act div{background:var(--ink);color:#e9f1f3;border-radius:6px;padding:22px}
+.act h3{color:#fff;font-weight:800}
+.act p,.act li{font-size:15px;color:#b9cdd3}
+.act ul{padding-left:18px}
+.lim{columns:2;column-gap:32px;font-size:15px;color:var(--mut)}
+.lim p{break-inside:avoid;margin-bottom:12px}
+.lim strong{color:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600}
+.scroll{overflow-x:auto}
+.hm td,.hm th{text-align:center;padding:7px 4px;font-size:13px;min-width:46px}
+.hm th:first-child,.hm td:first-child{text-align:left;font-weight:600;min-width:64px}
+.hm td{border:1px solid #fff}
+.cor{display:grid;grid-template-columns:44px repeat(9,1fr);gap:3px;font-size:12px}
+.cor .h{color:var(--mut);display:flex;align-items:center;justify-content:center;font-weight:600}
+.cor button{border:2px solid transparent;border-radius:3px;font:500 12px var(--fb);padding:7px 0;cursor:pointer;color:#111}
+.cor button[aria-pressed=true]{border-color:var(--ink)}
+.read{margin-top:14px;font-size:15px;min-height:48px}
+.hrs{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin:6px 0 8px}
+.hrs div{height:46px;border-radius:3px;background:#dde6e9;font-size:10px;color:var(--mut);display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px}
+.hrs .am{background:#c2410c;color:#fff}
+.hrs .pm{background:#0b6e7f;color:#fff}
+.hrs .ev{background:#e7a27f;color:#111}
+footer{background:var(--ink);color:#b9cdd3;padding:36px 0;font-size:14px}
+footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:#fff}
+@media(max-width:860px){.hero,.grid2,.claim,.act{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr 1fr}.kpi:nth-child(2){border-right:0}.kpi{border-bottom:1px solid var(--line)}.lim{columns:1}nav{display:none}.detail{grid-template-columns:1fr 1fr}.hrs div{font-size:8px}}
+@media(prefers-reduced-motion:no-preference){.cal{animation:in .6s ease-out}@keyframes in{from{opacity:0;transform:translateY(8px)}}}
+</style>
+</head>
+<body>
+<header class="top"><div class="w"><span class="brand">AA</span>
+<nav aria-label="Secciones"><a href="#anual">Año completo</a><a href="#meses">Meses</a><a href="#contam">Contaminantes</a><a href="#horas">Horas del día</a><a href="#meteo">Meteorología</a><a href="#hallazgos">Hallazgos</a><a href="#agencia">Agencia</a></nav></div></header>
+
+<main>
+<div class="w hero">
+ <div>
+  <h1>Más horas limpias en 2024, pero la mitad del año sigue en riesgo</h1>
+  <p>Las horas Buena subieron de 16% a 27%. Aun así, Mala, Muy Mala y Extremadamente Mala siguieron sumando cerca de 50% de las horas, y diciembre de 2024 duplicó el PM₁₀ de diciembre de 2023.</p>
+  <p class="meta">Estación PIN, Zona Metropolitana de Guadalajara · 2023 (365 días) vs 2024 (366 días) · Índice AIRE Y SALUD (NOM-172-SEMARNAT-2023). Elige un año y un mes en el calendario.</p>
+ </div>
+ <div class="cal" aria-label="Calendario anual por categoría diaria dominante">
+  <div class="yr" role="group" aria-label="Año"><button data-y="0" aria-pressed="false">2023</button><button data-y="1" aria-pressed="true">2024</button></div>
+  <div class="cal-g" id="cal"></div>
+  <div class="legend"><span><i style="background:var(--b)"></i>Buena</span><span><i style="background:var(--a)"></i>Aceptable</span><span><i style="background:var(--m)"></i>Mala</span><span><i style="background:var(--v)"></i>Muy Mala</span><span><i style="background:var(--x)"></i>Extremadamente Mala</span></div>
+  <p style="font-size:12px;color:var(--mut);margin-top:6px">Color: categoría que más días tuvo en el mes. Número: % de días fuera de norma (Mala o peor).</p>
+  <div class="detail" id="det" aria-live="polite"></div>
+ </div>
+</div>
+
+<div class="w"><div class="kpis">
+ <div class="kpi"><b>16% → 27%</b><span>de las horas fue Buena (2023 → 2024)</span></div>
+ <div class="kpi"><b>~50%</b><span>de las horas en Mala o peor, en los dos años</span></div>
+ <div class="kpi"><b>160</b><span>µg/m³ de PM₁₀ promedio en diciembre de 2024, contra 80 en diciembre de 2023</span></div>
+ <div class="kpi"><b id="kFuera"></b><span>días fuera de norma (2023 → 2024), según la tabla mensual</span></div>
+</div></div>
+
+<section id="anual"><div class="w">
+ <h2>Un año mejor en horas, igual de pesado en riesgo</h2>
+ <p class="lead">El aire Buena ganó 11 puntos, pero salió del bloque Aceptable, no del bloque de riesgo. La mitad superior de las barras casi no cambió.</p>
+ <div class="grid2">
+  <div class="panel"><h3>Distribución de horas (%)</h3><div class="ch"><canvas id="cHrs" role="img" aria-label="Porcentaje de horas por grupo de categoría: 2023 Buena 16, Aceptable 34, Riesgo 50; 2024 Buena 27, Aceptable 23, Riesgo 50"></canvas></div>
+   <p class="why"><strong>Por qué importa:</strong> Buena sube de 16% a 27% y Aceptable baja de 34% a 23%. Riesgo (Mala, Muy Mala y Extremadamente Mala) se queda en ~50%. La mejora no vino de reducir los peores episodios.</p></div>
+  <div class="panel"><h3>Días por categoría diaria</h3><div class="ch"><canvas id="cDays" role="img" aria-label="Días por categoría en 2023 y 2024"></canvas></div>
+   <p class="why" id="dayWhy"></p></div>
+ </div>
+</div></section>
+
+<section id="meses" class="alt"><div class="w">
+ <h2>El año tiene forma de U</h2>
+ <p class="lead">Los meses secos y fríos concentran los días fuera de norma. En lluvias el aire se limpia, sobre todo en 2024. El cierre de año es la diferencia más fuerte.</p>
+ <div class="panel"><h3>Días fuera de norma por mes (Mala, Muy Mala o Ext. Mala)</h3><div class="ch tall"><canvas id="cMes" role="img" aria-label="Días fuera de norma por mes en 2023 y 2024"></canvas></div>
+  <p class="why"><strong>Cómo leerla:</strong> en mayo de 2024 hubo 30 días fuera de norma y en diciembre de 2024 también 30 (96.8% del mes). En diciembre de 2023 fueron 19. En julio y agosto de 2024 bajó a 4 y 3 días.</p></div>
+ <div class="panel" style="margin-top:20px"><h3>Categorías diarias por mes</h3>
+  <div class="tabs" role="group" aria-label="Año a mostrar"><button data-s="0" aria-pressed="false">2023</button><button data-s="1" aria-pressed="true">2024</button></div>
+  <div class="ch tall"><canvas id="cStack" role="img" aria-label="Días por categoría en cada mes"></canvas></div>
+  <p class="why" id="stackWhy"></p></div>
+</div></section>
+
+<section id="contam"><div class="w">
+ <h2>Qué contaminante decide y cuánto cambió</h2>
+ <p class="lead">Las partículas mandan en los meses fríos y secos; el ozono pesa más en primavera-verano. Los promedios anuales cuentan una historia distinta según el contaminante.</p>
+ <div class="grid4" style="margin-bottom:20px">
+  <div class="stat"><h3>PM₂.₅ anual</h3><div class="v"><s>46.9</s>40.3</div><div class="dl">µg/m³ · −14%</div></div>
+  <div class="stat"><h3>PM₁₀ anual</h3><div class="v"><s>73.1</s>78.3</div><div class="dl">µg/m³ · +7%, empujado por diciembre</div></div>
+  <div class="stat"><h3>Ozono anual</h3><div class="v"><s>0.031</s>0.026</div><div class="dl">ppm · −16%</div></div>
+  <div class="stat"><h3>Humedad relativa, abril a diciembre</h3><div class="v">+17.7% a +110.5%</div><div class="dl">cambio mes a mes en 2024, salvo diciembre (−5.5%). Solo se comparan meses con dato en ambos años</div></div>
+ </div>
+ <div class="grid2">
+  <div class="panel"><h3>PM₁₀ promedio de diciembre (µg/m³)</h3><div class="ch short"><canvas id="cDec" role="img" aria-label="PM10 de diciembre: 80 en 2023 y 160 en 2024"></canvas></div>
+   <p class="why"><strong>Por qué importa:</strong> +99.2% frente a 2023. Diciembre de 2024 fue Muy Mala como categoría dominante, con 15 días Muy Mala y 4 Extremadamente Mala.</p></div>
+  <div class="panel"><h3>Cambio porcentual mes a mes, 2024 vs 2023</h3><div class="scroll"><table class="hm" id="hm"></table></div>
+   <p class="why"><strong>Cómo leerla:</strong> rojo es aumento en 2024 y azul es disminución. Las celdas grises lisas no tienen dato. Las celdas con trama y asterisco (viento de octubre a diciembre, −98%) son <strong>información dudosa</strong>: un descenso así es poco creíble y probablemente refleja fallas o huecos del sensor. En contaminantes, rojo es peor; en viento, temperatura y humedad solo indica dirección del cambio.</p></div>
+ </div>
+ <div class="panel scroll" style="margin-top:20px"><h3>Contaminante determinante y categoría dominante por mes</h3>
+  <table id="tDet"></table>
+  <p class="why">La categoría global es la del contaminante más deteriorado. Se leen los dos años lado a lado: de enero a mayo y de octubre a diciembre mandan las partículas; el ozono decide en junio, en 2024 también en agosto y septiembre.</p></div>
+</div></section>
+
+<section id="horas" class="alt"><div class="w">
+ <h2>Dos ventanas críticas cada día</h2>
+ <p class="lead">El patrón diurno promedio se repite en 2023 y 2024. La diferencia es el tamaño del pico, no la hora.</p>
+ <div class="panel">
+  <h3>Cuándo se concentra cada contaminante</h3>
+  <div class="hrs" id="hrs" aria-hidden="true"></div>
+  <div class="legend"><span><i style="background:#c2410c"></i>06:00 a 10:00 h: máximo de PM₂.₅ (inversión térmica y tráfico matutino)</span><span><i style="background:#0b6e7f"></i>13:00 a 17:00 h: máximo de ozono (radiación solar)</span><span><i style="background:#e7a27f"></i>~20:00 h: segundo repunte de PM₂.₅, más marcado en 2023</span></div>
+  <p class="why"><strong>Por qué importa:</strong> el aviso a personas sensibles y los turnos exteriores deben pensarse en dos momentos distintos. Por la mañana es el riesgo de partículas, por la tarde el de ozono. En todas las horas, 2024 quedó por debajo de 2023 en ozono y, en PM₂.₅, sobre todo en la tarde-noche.</p>
+ </div>
+</div></section>
+
+<section id="meteo"><div class="w">
+ <h2>Meteorología: coincidencias, no pruebas</h2>
+ <p class="lead">Selecciona una celda de la matriz para leer la relación. Una correlación describe que dos variables se mueven juntas; no demuestra que una cause la otra.</p>
+ <div class="grid2">
+  <div class="panel"><h3>Matriz de correlación (r)</h3><div class="cor" id="cor"></div>
+   <div class="read" id="read" aria-live="polite"></div></div>
+  <div class="panel"><h3>Lo que sí se ve</h3>
+   <ul style="padding-left:18px;font-size:15px">
+    <li style="margin-bottom:8px"><strong>Partículas y CO van juntos:</strong> PM₂.₅ con PM₁₀ r = 0.88; PM₁₀ con CO 0.81; PM₂.₅ con CO 0.69. Apuntan a fuentes de combustión en común.</li>
+    <li style="margin-bottom:8px"><strong>Ozono sigue al sol:</strong> con radiación r = +0.50 y con temperatura +0.37.</li>
+    <li style="margin-bottom:8px"><strong>Humedad baja el ozono:</strong> r = −0.51 con ozono y −0.27 con PM₂.₅.</li>
+    <li style="margin-bottom:8px"><strong>Viento y partículas:</strong> la relación es débil en la matriz (−0.04 con PM₂.₅ y −0.17 con PM₁₀). La idea de que el viento en calma acumula partículas es razonable, pero esta matriz anual no la confirma por sí sola.</li>
+    <li><strong>Lluvia:</strong> la precipitación no muestra correlación (|r| ≤ 0.06 con partículas); el efecto de la temporada de lluvias se ve en los meses, no en esta correlación horaria.</li>
+   </ul></div>
+ </div>
+</div></section>
+
+<section id="hallazgos" class="alt"><div class="w">
+ <h2>Hallazgos y su respaldo</h2>
+ <p class="lead">Cada conclusión va con la evidencia que la sostiene y lo que no podemos afirmar.</p>
+ <div class="claims">
+  <div class="claim"><div><h3>La mejora de 2024 es parcial</h3><p>Más horas Buena, pero igual de horas en riesgo.</p></div>
+   <ul><li>Buena pasó de 16% a 27% de las horas; Aceptable cayó de 34% a 23%.</li><li>Mala o peor se mantuvo en ~50% en ambos años.</li><li>Por días, la tabla mensual da 231 días fuera de norma en 2023 y 236 en 2024.</li></ul></div>
+  <div class="claim"><div><h3>La temporada de lluvias limpia el aire</h3><p>La coincidencia es fuerte, aunque no aísla una causa.</p></div>
+   <ul><li>De julio a septiembre, los días fuera de norma bajaron a 3 a 6 en 2024.</li><li>PM₂.₅ cayó hasta −71.4% en junio frente a 2023.</li><li>Septiembre de 2023 tuvo 0 días fuera de norma.</li></ul></div>
+  <div class="claim"><div><h3>El cierre de 2024 fue crítico</h3><p>Octubre a diciembre empeoraron mucho frente a 2023.</p></div>
+   <ul><li>PM₁₀: +62.0% en octubre y +99.2% en diciembre.</li><li>Días fuera de norma en diciembre: de 19 a 30.</li><li>Diciembre de 2024: 15 días Muy Mala y 4 Extremadamente Mala.</li></ul></div>
+  <div class="claim"><div><h3>Dos picos al día, dos contaminantes</h3><p>Partículas por la mañana, ozono por la tarde.</p></div>
+   <ul><li>06:00 a 10:00 h: máximo de PM₂.₅ y PM₁₀.</li><li>13:00 a 17:00 h: máximo de ozono, con la radiación solar.</li><li>El 1 de enero, en ambos años, hubo picos de PM₁₀ > 300 y PM₂.₅ > 200 µg/m³ entre las 01:00 y las 08:00 h.</li></ul></div>
+ </div>
+</div></section>
+
+<section id="datos"><div class="w">
+ <h2>Qué tan firme es cada conclusión</h2>
+ <p class="lead">Estos puntos cambian cómo debe leerse la comparación. Conviene decirlos en voz alta al presentar.</p>
+ <div class="lim">
+  <p><strong>Humedad: solo abril a diciembre.</strong> En 2024 no hay datos de humedad relativa de enero a marzo, meses secos que sí entran en el promedio anual de 2023. Por eso no se presenta el salto de 38.1% a 59.4% como comparación válida; la comparación se limita a los meses con dato en ambos años.</p>
+  <p><strong>Viento de octubre a diciembre: información dudosa.</strong> La caída de −98% es poco creíble como fenómeno real y probablemente refleja fallas o huecos del sensor (en marzo de 2024 ya faltaban 563 de 744 horas de velocidad). No se usa como explicación del pico de diciembre hasta validar el dato.</p>
+  <p><strong>PM₂.₅ sin dato en marzo de 2023.</strong> Ese mes no se puede comparar para ese contaminante, y el promedio anual de PM₂.₅ se calcula con menos meses de 2023.</p>
+  <p><strong>Dos índices distintos.</strong> SEMADET reporta días con mala calidad según IMECA: 197 en 2023 y 224 en 2024, con máximo de 174 a 184. Nuestra tabla usa el Índice AIRE Y SALUD y da 231 y 236. Ambos suben, pero no deben mezclarse.</p>
+  <p><strong>Correlación no es causa.</strong> Humedad, viento y radiación coinciden con cambios en contaminantes, pero no se probó causalidad.</p>
+  <p><strong>Sin inventario de fuentes.</strong> Las quemas, ladrilleras, pirotecnia y tráfico son causas posibles. La estación mide concentraciones y no dice de dónde vienen.</p>
+ </div>
+</div></section>
+
+<section id="agencia" class="alt"><div class="w">
+ <h2>Qué debería hacer la agencia</h2>
+ <p class="lead">Desde la perspectiva del aeropuerto, estos patrones tienen efectos operativos. Las causas son hipótesis a validar, no hechos.</p>
+ <div class="panel scroll" style="margin-bottom:24px"><h3>Patrón, causa posible e impacto en el aeropuerto</h3>
+ <table><tr><th>Patrón</th><th>Qué se observa</th><th>Causa posible</th><th>Impacto en el aeropuerto</th></tr>
+ <tr><td>U de partículas</td><td>80% a 96.8% de días fuera de norma en enero a mayo y octubre a diciembre; más limpio en lluvias</td><td>Inversiones térmicas, estiaje, viento en calma, polvo y quemas</td><td>Menor visibilidad en aproximación y polvo abrasivo en pistas y motores</td></tr>
+ <tr><td>Pico de ozono</td><td>Máximo en mayo y por las tardes</td><td>Alta radiación y temperatura</td><td>Estrés del personal de plataforma y desgaste de cauchos y sellos</td></tr>
+ <tr><td>Dos picos diarios</td><td>06:00 a 10:00 h y 13:00 a 17:00 h</td><td>Inversión térmica y tráfico; radiación solar</td><td>Coinciden con salidas comerciales de la mañana y turnos de rampa de la tarde</td></tr>
+ <tr><td>Año Nuevo</td><td>1 de enero, 01:00 a 08:00 h, en ambos años</td><td>Pirotecnia y fogatas con viento nulo</td><td>Riesgo de baja visibilidad en vuelos de madrugada y exposición del turno nocturno</td></tr>
+ <tr><td>Combustión compartida</td><td>PM₂.₅, PM₁₀ y CO con r de 0.69 a 0.88</td><td>Tráfico, industria, motores en rodaje y equipo de apoyo en tierra</td><td>Congestión de acceso y uso de equipo diésel en plataforma</td></tr></table></div>
+ <div class="act">
+  <div><h3>Proteger al personal de tierra</h3><ul><li>Alertas en tiempo real y mascarillas en episodios altos.</li><li>Descansos climatizados en picos de ozono y reprogramar trabajo exterior no urgente.</li><li>Reforzar la madrugada de Año Nuevo.</li></ul></div>
+  <div><h3>Mejorar infraestructura y operación</h3><ul><li>Filtros y ajuste de entrada de aire exterior en terminales durante episodios críticos.</li><li>Cambiar poco a poco vehículos de apoyo por eléctricos y hacer limpieza húmeda de plataformas.</li></ul></div>
+  <div><h3>Coordinar con aerolíneas y autoridades</h3><ul><li>Inspección y limpieza de compresores y filtros con más atención en periodos de contaminación alta.</li><li>Trabajo con SEMADET y municipios contra quemas agrícolas, de basura y emisiones de ladrilleras.</li></ul></div>
+  <div><h3>Comunicar a usuarios</h3><ul><li>Mostrar el estado del aire y las medidas en las pantallas de la terminal.</li><li>Avisar de posible baja visibilidad y recomendar anticipar traslados.</li><li>Agilizar ascenso y descenso y promover transporte colectivo.</li></ul></div>
+ </div>
+</div></section>
+</main>
+
+<footer><div class="w"><div><strong style="color:#fff">AA</strong> · Análisis y Visualización de la Información, CUCEI, Universidad de Guadalajara · Sprint 2, octubre de 2026</div>
+<div>Datos: <a href="https://aire.jalisco.gob.mx/">SIMAJ</a> · Comparativo: <a href="https://aire.jalisco.gob.mx/reportes/NumeraliaIMECA2024.pdf">SEMADET 2023 vs 2024</a> · Código: <a href="https://github.com/LilChaveZz/sprint1-avi">repositorio en GitHub</a></div></div></footer>
+
+<script>
+const MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],MS=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+// [Buena, Aceptable, Mala, Muy Mala, Ext. Mala]
+const M=[
+[[1,0,12,14,4],[0,0,19,8,1],[1,6,21,2,1],[1,5,19,4,1],[0,2,20,9,0],[0,5,8,8,9],[4,9,15,3,0],[5,19,3,3,1],[6,24,0,0,0],[10,14,6,1,0],[0,10,13,6,1],[3,9,13,6,0]],
+[[0,2,16,11,2],[1,5,8,15,0],[0,3,23,5,0],[0,2,27,1,0],[0,1,26,4,0],[8,9,9,4,0],[18,9,3,1,0],[13,15,2,1,0],[18,6,5,1,0],[6,8,15,2,0],[0,5,19,5,1],[1,0,11,15,4]]];
+const DOM=[['X','V','M','M','M','M','M','M','M','M','M','M'].map((c,i)=>c),[]];
+DOM[0]=['V','M','M','M','M','X','M','A','A','A','M','M'];
+DOM[1]=['M','V','M','M','M','M','B','A','B','M','M','V'];
+const DET=[['PM₁₀','PM₂.₅ + PM₁₀','PM₁₀ + O₃','PM₁₀ + O₃','PM₂.₅','O₃','O₃','PM₂.₅ + O₃','PM₂.₅','O₃','PM₂.₅ + PM₁₀','PM₂.₅ + PM₁₀'],
+['PM₂.₅ + PM₁₀','PM₂.₅','PM₂.₅ + PM₁₀','PM₂.₅ + PM₁₀','PM₁₀','O₃','PM₂.₅ + PM₁₀','O₃','O₃','PM₁₀','PM₁₀','PM₁₀']];
+const CN={B:'Buena',A:'Aceptable',M:'Mala',V:'Muy Mala',X:'Extremadamente Mala'};
+const CC={B:'#00e400',A:'#ffff00',M:'#ff7e00',V:'#ff0000',X:'#8f3f97'};
+const tot=m=>m.reduce((a,b)=>a+b,0),fuera=m=>m[2]+m[3]+m[4];
+const F=M.map(y=>y.map(fuera)),T=M.map(y=>y.map(tot));
+const FY=F.map(a=>tot(a)),TY=T.map(a=>tot(a));
+document.getElementById('kFuera').textContent=FY[0]+' → '+FY[1];
+const cal=document.getElementById('cal'),det=document.getElementById('det');
+let Y=1,S=11;
+function drawCal(){
+ cal.innerHTML='';
+ for(let i=0;i<12;i++){
+  const c=DOM[Y][i],b=document.createElement('button');
+  b.className='d '+c;b.style.background=CC[c];b.dataset.m=i;
+  b.setAttribute('aria-pressed',i===S);
+  b.setAttribute('aria-label',`${MN[i]} ${2023+Y}, ${CN[c]}, ${(F[Y][i]/T[Y][i]*100).toFixed(1)}% de días fuera de norma`);
+  b.innerHTML=`${MS[i]}<small>${Math.round(F[Y][i]/T[Y][i]*100)}% fuera</small>`;
+  b.onclick=()=>{S=i;drawCal()};cal.appendChild(b);
+ }
+ const m=M[Y][S],o=M[1-Y][S],c=DOM[Y][S],d=F[Y][S]-F[1-Y][S];
+ const dd=(Y===1?d:-d);
+ det.innerHTML=`<div class="t"><strong>${MN[S]} de ${2023+Y}:</strong> ${CN[c]}, determinado por ${DET[Y][S]}</div>
+ <div><b>${F[Y][S]}/${T[Y][S]}</b>días fuera de norma</div>
+ <div><b>${m[0]+m[1]}</b>días Buena o Aceptable</div>
+ <div><b>${m[3]+m[4]}</b>días Muy Mala o peor</div>
+ <div><b>${(Y===1?d:-d)>0?'+':''}${Y===1?d:-d}</b>días fuera de norma, 2024 vs 2023</div>`;
+}
+document.querySelectorAll('[data-y]').forEach(b=>b.onclick=()=>{Y=+b.dataset.y;document.querySelectorAll('[data-y]').forEach(x=>x.setAttribute('aria-pressed',x===b));drawCal()});
+drawCal();
+
+Chart.defaults.font.family="'IBM Plex Sans',sans-serif";Chart.defaults.color='#546a75';
+const X={responsive:true,maintainAspectRatio:false},Y23='#0b6e7f',Y24='#c2410c';
+new Chart('cHrs',{type:'bar',data:{labels:['2023','2024'],datasets:[
+ {label:'Buena',data:[16,27],backgroundColor:'#00e400'},
+ {label:'Aceptable',data:[34,23],backgroundColor:'#ffff00'},
+ {label:'Riesgo (Mala, Muy Mala, Ext. Mala)',data:[50,50],backgroundColor:'#ff7e00'}].map(d=>({...d,borderColor:'rgba(0,0,0,.35)',borderWidth:1}))},
+ options:{...X,plugins:{legend:{position:'bottom'}},scales:{x:{stacked:true},y:{stacked:true,max:100,title:{display:true,text:'% de horas'}}}}});
+const cats=['Buena','Aceptable','Mala','Muy Mala','Ext. Mala'];
+const dc=[0,1].map(y=>cats.map((_,k)=>tot(M[y].map(m=>m[k]))));
+new Chart('cDays',{type:'bar',data:{labels:cats,datasets:[{label:'2023',data:dc[0],backgroundColor:Y23},{label:'2024',data:dc[1],backgroundColor:Y24}]},options:{...X,plugins:{legend:{position:'bottom'}},scales:{y:{title:{display:true,text:'Días'}}}}});
+document.getElementById('dayWhy').innerHTML=`<strong>Por qué importa:</strong> 2024 duplicó los días Buena (${dc[0][0]} → ${dc[1][0]}) y bajó Aceptable (${dc[0][1]} → ${dc[1][1]}), pero subió Mala (${dc[0][2]} → ${dc[1][2]}) y Muy Mala (${dc[0][3]} → ${dc[1][3]}). Extremadamente Mala bajó de ${dc[0][4]} a ${dc[1][4]}.`;
+new Chart('cMes',{type:'bar',data:{labels:MS,datasets:[{label:'2023',data:F[0],backgroundColor:Y23},{label:'2024',data:F[1],backgroundColor:Y24}]},options:{...X,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom'}},scales:{y:{max:31,title:{display:true,text:'Días'}}}}});
+let st;const SW=['<strong>2023:</strong> junio fue el único mes con días Extremadamente Mala en volumen (9) y enero tuvo 14 días Muy Mala. De agosto a octubre predominó Aceptable.','<strong>2024:</strong> julio y septiembre tuvieron 18 días Buena cada uno. Febrero y diciembre concentran los días Muy Mala (15 en cada uno), y diciembre sumó 4 Extremadamente Mala.'];
+function drawStack(y){st&&st.destroy();
+ st=new Chart('cStack',{type:'bar',data:{labels:MS,datasets:cats.map((c,k)=>({label:c,data:M[y].map(m=>m[k]),backgroundColor:['#00e400','#ffff00','#ff7e00','#ff0000','#8f3f97'][k],borderColor:'rgba(0,0,0,.3)',borderWidth:1}))},options:{...X,plugins:{legend:{position:'bottom'}},scales:{x:{stacked:true},y:{stacked:true,max:31,title:{display:true,text:'Días'}}}}});
+ document.getElementById('stackWhy').innerHTML=SW[y]}
+document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-s]').forEach(x=>x.setAttribute('aria-pressed',x===b));drawStack(+b.dataset.s)});drawStack(1);
+new Chart('cDec',{type:'bar',data:{labels:['Dic 2023','Dic 2024'],datasets:[{data:[80,160],backgroundColor:[Y23,Y24]}]},options:{...X,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'µg/m³'},beginAtZero:true}}}});
+
+// Heatmap Δ%
+const HM={'PM₁₀':[-10.0,-1.6,-3.9,0.0,0.2,-30.3,-14.8,-6.4,-26.1,62.0,11.3,99.2],
+'PM₂.₅':[-12.9,-4.0,null,-15.9,-49.3,-71.4,-56.7,-43.7,-63.3,-22.3,-36.5,32.7],
+'O₃':[-39.6,-23.0,-28.5,-23.1,-3.9,-32.0,-39.0,-16.2,-6.1,24.9,-5.1,37.0],
+'Viento':[113.7,146.0,159.9,75.1,69.2,36.9,-45.8,-58.9,-47.0,-98.5,-98.3,-98.1],
+'Temp.':[9.0,21.2,15.4,20.7,12.0,-4.1,-26.9,-15.6,-12.2,-1.5,-2.4,-5.5],
+'Humedad':[null,null,null,110.5,76.9,77.7,70.7,61.4,58.9,22.3,17.7,-5.5]};
+const hm=document.getElementById('hm');
+hm.innerHTML='<tr><th></th>'+MS.map(m=>`<th>${m}</th>`).join('')+'</tr>'+Object.entries(HM).map(([k,r])=>`<tr><td>${k}</td>`+r.map(v=>{
+ if(v==null)return '<td style="background:#e3e8ea;color:#8aa0a9">s/d</td>';
+ const a=Math.min(Math.abs(v)/100,1),bg=v>=0?`rgba(194,65,12,${.12+a*.8})`:`rgba(11,110,127,${.12+a*.8})`;
+ return `<td style="background:${bg};color:${a>.55?'#fff':'#0f2530'}">${v>0?'+':''}${v.toFixed(1)}</td>`}).join('')+'</tr>').join('');
+// Viento oct-dic: dato dudoso (trama gris con asterisco)
+const wr=hm.rows[4];for(let c=10;c<=12;c++){const t=wr.cells[c];t.style.background='repeating-linear-gradient(45deg,#dfe6e9,#dfe6e9 5px,#fff 5px,#fff 10px)';t.style.color='#546a75';t.textContent=t.textContent+'*';t.title='Dato dudoso: probable falla o ausencia de registros del sensor'}
+
+// Determinante table
+document.getElementById('tDet').innerHTML='<tr><th>Mes</th><th>2023: categoría</th><th>2023: determinante</th><th>2024: categoría</th><th>2024: determinante</th></tr>'+MN.map((m,i)=>{
+ const sw=c=>`<i style="display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:8px;border:1px solid rgba(0,0,0,.25);vertical-align:-1px;background:${CC[c]}"></i>`;
+ return `<tr><td>${m}</td><td>${sw(DOM[0][i])}${CN[DOM[0][i]]}</td><td>${DET[0][i]}</td><td>${sw(DOM[1][i])}${CN[DOM[1][i]]}</td><td>${DET[1][i]}</td></tr>`}).join('');
+
+// Horas del día
+const hrs=document.getElementById('hrs');
+for(let h=0;h<24;h++){const d=document.createElement('div');d.textContent=String(h).padStart(2,'0');
+ if(h>=6&&h<=10)d.className='am';else if(h>=13&&h<=17)d.className='pm';else if(h===20)d.className='ev';hrs.appendChild(d)}
+
+// Correlación
+const V=['PM₂.₅','PM₁₀','O₃','CO','Viento','Temp.','Humedad','Radiac.','Lluvia'];
+const R=[[1,.88,-.11,.69,-.04,-.11,-.27,-.09,-.06],[.88,1,-.22,.81,-.17,-.24,-.13,-.18,-.06],[-.11,-.22,1,-.36,.23,.37,-.51,.50,-.02],[.69,.81,-.36,1,-.29,-.38,.09,-.20,-.04],[-.04,-.17,.23,-.29,1,.38,-.21,-.03,-.01],[-.11,-.24,.37,-.38,.38,1,-.12,-.04,-.03],[-.27,-.13,-.51,.09,-.21,-.12,1,-.56,.13],[-.09,-.18,.50,-.20,-.03,-.04,-.56,1,-.01],[-.06,-.06,-.02,-.04,-.01,-.03,.13,-.01,1]];
+const cor=document.getElementById('cor'),rd=document.getElementById('read');let sel=[2,6];
+const cc=r=>{const a=Math.min(Math.abs(r),1);return r>=0?`rgba(194,65,12,${.08+a*.85})`:`rgba(11,110,127,${.08+a*.85})`};
+function strength(r){const a=Math.abs(r);return a>=.7?'fuerte':a>=.4?'moderada':a>=.2?'débil':'casi nula'}
+function drawCor(){
+ cor.innerHTML='<div></div>'+V.map(v=>`<div class="h">${v.slice(0,5)}</div>`).join('');
+ R.forEach((row,i)=>{cor.insertAdjacentHTML('beforeend',`<div class="h">${V[i].slice(0,5)}</div>`);
+  row.forEach((r,j)=>{const b=document.createElement('button');b.textContent=r.toFixed(2);b.style.background=cc(r);
+   if(Math.abs(r)>.6)b.style.color='#fff';
+   b.setAttribute('aria-pressed',sel[0]===i&&sel[1]===j);b.setAttribute('aria-label',`${V[i]} con ${V[j]}: ${r.toFixed(2)}`);
+   b.onclick=()=>{sel=[i,j];drawCor()};cor.appendChild(b)})});
+ const [i,j]=sel,r=R[i][j];
+ rd.innerHTML=i===j?`<strong>${V[i]}</strong> consigo misma: 1.00.`:`<strong>${V[i]} y ${V[j]}:</strong> r = ${r.toFixed(2)}, relación ${strength(r)} y ${r>0?'directa':'inversa'}. Coinciden en el tiempo; esto no prueba causa.`}
+drawCor();
+</script>
+</body>
+</html>
